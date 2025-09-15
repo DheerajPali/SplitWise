@@ -1,20 +1,19 @@
 package dev.dheeraj.splitwise.model;
 
 import dev.dheeraj.splitwise.model.constant.UserExpenseType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 public class UserExpense extends BaseModel{
     private double amount;
-    private UserExpenseType type;
+    @Enumerated(EnumType.ORDINAL)
+    private UserExpenseType userExpenseType;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+//    @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
-    @JoinColumn(name = "expense_id")
+//    @JoinColumn(name = "expense_id")
     private Expense expense;
 }

@@ -2,6 +2,8 @@ package dev.dheeraj.splitwise.model;
 
 import dev.dheeraj.splitwise.model.constant.UserStatus;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToMany;
 import lombok.Data;
 
@@ -13,7 +15,8 @@ public class User extends  BaseModel{
     private String name;
     private long phone;
     private String password;
-    private UserStatus status;
-    @ManyToMany
+    @Enumerated(EnumType.ORDINAL)
+    private UserStatus userStatus;
+    @ManyToMany(mappedBy = "members")
     private List<Group> groups;
 }

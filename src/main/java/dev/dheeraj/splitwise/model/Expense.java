@@ -1,9 +1,7 @@
 package dev.dheeraj.splitwise.model;
 
 import dev.dheeraj.splitwise.model.constant.ExpenseType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -11,7 +9,8 @@ import lombok.Data;
 public class Expense extends BaseModel{
     private double amount;
     private String description;
-    private ExpenseType type;
+    @Enumerated(EnumType.ORDINAL)
+    private ExpenseType expenseType;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
