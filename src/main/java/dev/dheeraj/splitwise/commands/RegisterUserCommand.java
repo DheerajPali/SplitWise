@@ -1,9 +1,9 @@
 package dev.dheeraj.splitwise.commands;
 
 import dev.dheeraj.splitwise.controller.UserController;
-import dev.dheeraj.splitwise.model.User;
-import dev.dheeraj.splitwise.model.constant.UserStatus;
+import dev.dheeraj.splitwise.dto.RegisterUserRequestDto;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -14,6 +14,7 @@ import java.util.List;
 public class RegisterUserCommand implements Command{
     private UserController userController;
 
+    @Autowired
     public RegisterUserCommand(UserController userController){
         this.userController = userController;
     }
@@ -31,13 +32,12 @@ public class RegisterUserCommand implements Command{
         String phoneNumber = inputWords.get(2);
         String userName = inputWords.get(3);
 
-        User user = new User();
-        user.setPassword(password);
-        user.setPhone(Long.parseLong(phoneNumber));
-        user.setName(userName);
-        user.setUserStatus(UserStatus.ACTIVE);
 
-        // call userController here to save user
-//        userRepository.save(user);
+        RegisterUserRequestDto requestDto = new RegisterUserRequestDto();
+        requestDto.setUserName(userName);
+        requestDto.setPhoneNumber(Long.parseLong(phoneNumber));
+        requestDto.setPassword(password);
+
+        userController.registerUser(requestDto);
     }
 }
