@@ -5,6 +5,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.web.bind.annotation.Mapping;
 
 import java.util.List;
@@ -18,5 +19,6 @@ public class Group extends BaseModel{
     @JoinColumn(name = "user_id")
     private User createdBy;
     @ManyToMany
+    @ToString.Exclude
     private List<User> members;
 }

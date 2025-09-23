@@ -1,15 +1,17 @@
 package dev.dheeraj.splitwise.model;
 
 import dev.dheeraj.splitwise.model.constant.UserStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
-@Data
+//@Data
+@Getter
+@Setter
 @Entity(name = "users")
 public class User extends  BaseModel{
     private String name;
@@ -18,5 +20,6 @@ public class User extends  BaseModel{
     @Enumerated(EnumType.ORDINAL)
     private UserStatus userStatus;
     @ManyToMany(mappedBy = "members")
+    @ToString.Exclude
     private List<Group> groups;
 }

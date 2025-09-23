@@ -1,20 +1,29 @@
 package dev.dheeraj.splitwise.commands;
 
+import dev.dheeraj.splitwise.dto.AddMemberToGroupRequestDTO;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+//@NoArgsConstructor
 public class CommandRegistry {
     private List<Command> commands;
     private RegisterUserCommand registerUserCommand;
     private UpdateUserCommand updateUserCommand;
+    private CreateGroupCommand createGroupCommand;
+    private GetGroupsCommand getGroupsCommand;
+    private AddMemberToGroupCommand addMemberToGroupCommand;
 
-    public CommandRegistry(RegisterUserCommand registerUserCommand, UpdateUserCommand updateUserCommand){
+    public CommandRegistry(UpdateUserCommand updateUserCommand, RegisterUserCommand registerUserCommand, CreateGroupCommand createGroupCommand, GetGroupsCommand getGroupsCommand, AddMemberToGroupCommand addMemberToGroupCommand) {
         this.commands = new ArrayList<>();
-        commands.add(registerUserCommand);
         commands.add(updateUserCommand);
+        commands.add(registerUserCommand);
+        commands.add(createGroupCommand);
+        commands.add(getGroupsCommand);
+        commands.add(addMemberToGroupCommand);
     }
 
     public void execute(String input){
