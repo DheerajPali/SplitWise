@@ -1,8 +1,7 @@
 package dev.dheeraj.splitwise.controller;
 
-import dev.dheeraj.splitwise.dto.RegisterUserRequestDto;
-import dev.dheeraj.splitwise.dto.RegisterUserResponseDto;
-import dev.dheeraj.splitwise.dto.ResponseStatus;
+import dev.dheeraj.splitwise.dto.*;
+import dev.dheeraj.splitwise.exception.InvalidCredentials;
 import dev.dheeraj.splitwise.exception.UserAlreadyExistsException;
 import dev.dheeraj.splitwise.model.User;
 import dev.dheeraj.splitwise.service.UserService;
@@ -17,8 +16,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    public RegisterUserResponseDto registerUser(RegisterUserRequestDto requestDto){
-        RegisterUserResponseDto responseDto = new RegisterUserResponseDto();
+    public RegisterUserResponseDTO registerUser(RegisterUserRequestDTO requestDto){
+        RegisterUserResponseDTO responseDto = new RegisterUserResponseDTO();
         try{
             User user = userService.registerUser(requestDto.getUserName(),requestDto.getPhoneNumber(),requestDto.getPassword());
             responseDto.setUser(user);
@@ -34,5 +33,25 @@ public class UserController {
             responseDto.setMessage(e.getMessage());
         }
         return responseDto;
+    }
+
+    public UpdateUserResponseDTO updateUser(UpdateUserRequestDTO requestDTO){
+        UpdateUserResponseDTO responseDTO = new UpdateUserResponseDTO();
+        try{
+            User user = userService.updateUserProfile(requestDTO.getPhoneNumber(), requestDTO.getOldPassword(), requestDTO.getNewPassword());
+            responseDTO.setUser(user);
+            responseDTO.setResponseStatus(ResponseStatus.SUCCESS);
+            responseDTO.setMessage("User updated successfully");
+            return responseDTO;
+        }
+        catch (InvalidCredentials e){
+            responseDTO.setResponseStatus(ResponseStatus.FAILURE);
+            responseDTO.setMessage(e.getMessage());
+        }
+        catch (Exception e){
+            responseDTO.setResponseStatus(ResponseStatus.FAILURE);
+            responseDTO.setMessage(e.getMessage());
+        }
+        return responseDTO;
     }
 }

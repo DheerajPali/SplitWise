@@ -1,7 +1,7 @@
 package dev.dheeraj.splitwise.commands;
 
 import dev.dheeraj.splitwise.controller.UserController;
-import dev.dheeraj.splitwise.dto.RegisterUserRequestDto;
+import dev.dheeraj.splitwise.dto.RegisterUserRequestDTO;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class RegisterUserCommand implements Command{
         String userName = inputWords.get(3);
 
 
-        RegisterUserRequestDto requestDto = new RegisterUserRequestDto();
+        RegisterUserRequestDTO requestDto = new RegisterUserRequestDTO();
         requestDto.setUserName(userName);
         requestDto.setPhoneNumber(Long.parseLong(phoneNumber));
         requestDto.setPassword(password);

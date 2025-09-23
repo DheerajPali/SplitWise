@@ -1,21 +1,37 @@
 package dev.dheeraj.splitwise.commands;
 
+import dev.dheeraj.splitwise.controller.UserController;
+import dev.dheeraj.splitwise.dto.UpdateUserRequestDTO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.List;
-
+@Component
+@RequiredArgsConstructor
 public class UpdateUserCommand implements Command{
+
+    private final UserController userController;
+
     @Override
     public boolean matches(String string) {
         List<String> inputWords = Arrays.stream(string.split(" ")).toList();
-        return inputWords.size() == 3 && inputWords.get(1).equalsIgnoreCase(CommandKeywords.UPDATE_PROFILE);
+        return inputWords.size() == 4 && inputWords.get(1).equalsIgnoreCase(CommandKeywords.UPDATE_PROFILE);
     }
 
     @Override
     public void execute(String string) {
         List<String> inputWords = Arrays.stream(string.split(" ")).toList();
-        String userName = inputWords.getFirst();
-        String newPassword = inputWords.getLast();
+        String phoneNumber = inputWords.get(0);
+        String oldPassword = inputWords.get(2);
+        String newPassword = inputWords.get(3);
 
-        //here I'll call UpdateUser method from my controller & will send request dto as input.
+        UpdateUserRequestDTO requestDTO = new UpdateUserRequestDTO();
+        requestDTO.setPhoneNumber(Long.parseLong(phoneNumber));
+        requestDTO.setOldPassword(oldPassword);
+        requestDTO.setNewPassword(newPassword);
+
+        userController.updateUser(requestDTO);
+
     }
 }

@@ -1,5 +1,6 @@
 package dev.dheeraj.splitwise.service;
 
+import dev.dheeraj.splitwise.exception.InvalidCredentials;
 import dev.dheeraj.splitwise.exception.UserAlreadyExistsException;
 import dev.dheeraj.splitwise.model.User;
 import dev.dheeraj.splitwise.model.constant.UserStatus;
@@ -32,6 +33,17 @@ public class UserService {
         user.setName(userName);
         user.setUserStatus(UserStatus.ACTIVE);
 
+        return  userRepository.save(user);
+    }
+
+    public User updateUserProfile(Long phoneNumber, String oldPassword, String newPassword) throws  InvalidCredentials{
+        User user = userRepository.getUserByPhone(phoneNumber);
+        if(user == null || !user.getPassword().equalsIgnoreCase(oldPassword)){
+            System.out.println("Invalid Credentials, please try again");
+            throw new InvalidCredentials("Invalid Credentials, please try again");
+        }
+
+        user.setPassword(newPassword);
         return  userRepository.save(user);
     }
 }
