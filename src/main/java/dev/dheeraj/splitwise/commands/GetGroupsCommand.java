@@ -1,9 +1,8 @@
 package dev.dheeraj.splitwise.commands;
 
-import dev.dheeraj.splitwise.controller.GroupController;
-import dev.dheeraj.splitwise.dto.GetGroupByUserRequestDTO;
+import dev.dheeraj.splitwise.controllers.GroupController;
+import dev.dheeraj.splitwise.dtos.GetGroupByUserRequestDTO;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

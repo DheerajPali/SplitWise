@@ -1,7 +1,5 @@
 package dev.dheeraj.splitwise.commands;
 
-import dev.dheeraj.splitwise.dto.AddMemberToGroupRequestDTO;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

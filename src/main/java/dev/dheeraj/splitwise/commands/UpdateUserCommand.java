@@ -1,7 +1,7 @@
 package dev.dheeraj.splitwise.commands;
 
-import dev.dheeraj.splitwise.controller.UserController;
-import dev.dheeraj.splitwise.dto.UpdateUserRequestDTO;
+import dev.dheeraj.splitwise.controllers.UserController;
+import dev.dheeraj.splitwise.dtos.UpdateUserRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
